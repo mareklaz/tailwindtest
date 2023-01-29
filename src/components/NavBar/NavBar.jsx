@@ -6,7 +6,7 @@ import {
 	ShoppingCartIcon,
 	XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const user = {
 	name: 'Tom Cook',
@@ -14,15 +14,15 @@ const user = {
 	imageUrl: 'https://cdn-icons-png.flaticon.com/512/5372/5372848.png',
 };
 const navigation = [
-	{ name: 'Productos', href: '/productos', current: true },
-	{ name: 'Pedidos', href: '#', current: false },
-	{ name: 'Historial', href: '#', current: false },
-	{ name: 'Direcciones', href: '#', current: false },
+	{ name: 'Productos', to: '/productos', current: true },
+	{ name: 'Pedido', to: '/pedido', current: false },
+	{ name: 'Historial', to: '/historico', current: false },
+	{ name: 'Direcciones', to: '/direcciones', current: false },
 ];
 const userNavigation = [
-	{ name: 'Perfil', href: '#' },
-	{ name: 'Configuración', href: '#' },
-	{ name: 'Cerrar sesión', href: '#' },
+	{ name: 'Perfil', to: '#' },
+	{ name: 'Configuración', to: '#' },
+	{ name: 'Cerrar sesión', to: '#' },
 ];
 
 function classNames(...classes) {
@@ -61,18 +61,20 @@ export default function NavBar() {
 										</div>
 										<div className='hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8'>
 											{navigation.map((item) => (
-												<Link
+												<NavLink
 													key={item.name}
-													to={item.href}
-													className={classNames(
-														item.current
-															? 'border-red-500 text-gray-900'
-															: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-														'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
-													)}
+													to={item.to}
+													className={({ isActive }) =>
+														classNames(
+															isActive
+																? 'border-red-500 text-gray-900'
+																: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+															'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium'
+														)
+													}
 													aria-current={item.current ? 'page' : undefined}>
 													{item.name}
-												</Link>
+												</NavLink>
 											))}
 										</div>
 									</div>
